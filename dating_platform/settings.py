@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'rest_framework',
-    'api',
-    'psycopg2',
+    "rest_framework",
+    "api",
+    "psycopg2",
+    "drf_yasg",
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -76,24 +78,15 @@ WSGI_APPLICATION = "dating_platform.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': os.environ.get('POSTGRES_DB', 'dataproject'),
-#        'USER': os.environ.get('POSTGRES_USER', 'Mitya'),
-#        'PASSWORD': os.environ.get('POSTGRES_PASSWORD','Baburin17!'),
-#        'HOST': 'db',  # Имя службы в docker-compose
-#        'PORT': '5432',
-#    }
-#}
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dataproject',  # Имя вашей базы данных
-        'USER': 'Mitya',        # Имя пользователя
-        'PASSWORD': 'Baburin17!',  # Обновлённый пароль
-        'HOST': 'db',           # Имя сервиса Docker
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "dataproject",
+        "USER": "Mitya",
+        "PASSWORD": "Baburin17!",
+        "HOST": "db",
+        "PORT": "5432",
     }
 }
 
@@ -141,7 +134,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),  # Время жизни токена
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),  # Время жизни рефреш токена
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
 }
