@@ -5,7 +5,7 @@ services:
     image: postgres:latest
     environment:
       POSTGRES_USER: Mitya
-      POSTGRES_PASSWORD: Baburin17!  # Укажите пароль
+      POSTGRES_PASSWORD: Baburin17!  
       POSTGRES_DB: dataproject
     volumes:
       - pgdata:/var/lib/postgresql/data
